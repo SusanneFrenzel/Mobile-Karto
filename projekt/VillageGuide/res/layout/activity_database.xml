@@ -12,7 +12,9 @@
         android:background="#424242"
         android:padding="10dp"
         android:text="@string/textView1"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:onClick="onClickOpenListView"
+        android:clickable="true" />
 
     <ListView
         android:id="@android:id/list"
