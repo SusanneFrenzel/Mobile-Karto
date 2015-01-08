@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">VillageGuide</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="button1">Karte</string>
+    <string name="button2">Kategorien</string>
+    <string name="bild">hier sollte ein Bild sein</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_database">DatabaseActivity</string>
+
+</resources>

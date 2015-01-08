@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/image_view_1"
+        android:adjustViewBounds="true"
+        android:text="@string/bild" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:background="#aa0000"
+        android:layout_below="@id/image_view_1"
+        android:onClick="onClickStartNewActivity"
+        android:text="@string/button1" />
+    
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#aa0000"
+        android:layout_toRightOf="@id/button1"
+        android:onClick="onClickStartNewActivity"
+        android:text="@string/button2" />
+    
+
+</RelativeLayout>
