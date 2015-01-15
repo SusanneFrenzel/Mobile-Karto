@@ -12,8 +12,10 @@
     <string name="button3">R</string>
     <string name="button4">E</string>
     <string name="button5">L</string>
-    <string name="textView1">Hunger</string>
-    <string name="textView2">Sehenswürdigkeiten</string>
-    <string name="textView3">Gesundheit</string>
+    <string name="button6">K</string>
+    <string name="textView1">Kategorie 1</string>
+    <string name="textView2">Kategorie 2</string>
+    <string name="textView3">Kategorie 3</string>
+    <string name="textView4">Kategorie 4</string>
 
 </resources>
