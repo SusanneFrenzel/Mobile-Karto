@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/wappen_niederwiesa" />"
+        android:src="@drawable/lichtendings" />"
 
     <Button
         android:id="@+id/button1"

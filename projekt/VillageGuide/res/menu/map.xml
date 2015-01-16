@@ -7,5 +7,15 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    <item
+        android:id="@+id/action_map"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/map"/>
+    <item
+        android:id="@+id/action_list"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/list"/>
 
 </menu>

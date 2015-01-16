@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,58 +15,53 @@
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1" >
+        </fragment>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        style="?android:attr/borderlessButtonStyle" >
+            <ImageButton
+                android:id="@+id/imageButton1"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:onClick="onClickShowOnMap"
+                android:src="@drawable/button_custom" />
 
-        <Button
-            android:id="@+id/button3"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="@string/button3"
-            android:background="@drawable/button_custom"
-            android:onClick="onClickShowOnMap"
-             />
+            <ImageButton
+                android:id="@+id/imageButton2"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:onClick="onClickShowOnMap"
+                android:src="@drawable/button_custom1" />
 
-        <Button
-            android:id="@+id/button4"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:onClick="onClickStartNewActivityDatabase"
-            android:text="@string/button4" />
-
-        <Button
-            android:id="@+id/button5"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:onClick="onClickStartNewActivityDatabase"
-            android:text="@string/button5" />
-
-        <Button
-            android:id="@+id/button6"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:onClick="onClickStartNewActivityDatabase"
-            android:text="@string/button6" />
+            <ImageButton
+                android:id="@+id/imageButton3"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:onClick="onClickShowOnMap"
+                android:src="@drawable/button_custom2" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
