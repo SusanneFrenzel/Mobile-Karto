@@ -42,7 +42,8 @@
         <activity
             android:name=".DatabaseActivity"
             android:label="@string/title_activity_database" >
-           
+          
+     
         </activity>
     </application>
 
