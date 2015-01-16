@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <TextView
+ <TextView
         android:id="@+id/text_view1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,15 +12,14 @@
         android:padding="10dp"
         android:text="@string/textView1"
         android:textSize="16sp"
-        android:onClick="onClickOpenListView"
+        android:onClick="onClickOpenListView1"
         android:clickable="true" />
-
-    <ListView
+    
+     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
-
+        android:layout_height="wrap_content"/>
+     
     <TextView
         android:id="@+id/text_view2"
         android:layout_width="match_parent"
@@ -37,8 +35,7 @@
      <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/text_view3"
@@ -55,10 +52,8 @@
      <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
-    
+        android:layout_height="wrap_content"/>
 
- 
+   
 
 </LinearLayout>

@@ -17,6 +17,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,92 +33,38 @@ public class DatabaseActivity extends ListActivity {
 	Cursor dbCursor;
 	DatabaseHelper dbHelper = new DatabaseHelper(this);
 
+	
+	// Action Bar
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.map, menu);
+		return true;
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_map:
+			Intent intentMap = new Intent(this, MapActivity.class);
+			startActivity(intentMap);}
+		switch (item.getItemId()){
+		case R.id.action_list:
+			
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_database);
-
-		// queryDataFromDatabase();
-
 	}
 
-	public void onClickOpenListView(View view) {
-		// mach was
-		// Intent intentMap = new Intent(this, MapActivity.class);
-		// startActivity(intentMap);
-		//
-
-		// public void queryDataFromDatabase() {
-		try {
-			dbHelper.createDataBase();
-		} catch (IOException ioe) {
-		}
-		List<String> list_values = new ArrayList<String>();
-		try {
-			database = dbHelper.getDataBase();
-			// DB Abfrage
-			dbCursor = database.rawQuery(
-					"SELECT Name FROM Hunger;", null);
-//			dbCursor = database.rawQuery("SELECT university FROM db_table", null);		
-			dbCursor.moveToFirst();
-			int index = dbCursor.getColumnIndex("Name");
-			while (!dbCursor.isAfterLast()) {
-				String record = dbCursor.getString(index);
-				list_values.add(record);
-				dbCursor.moveToNext();
-			}
-		} finally {
-			if (database != null) {
-				dbHelper.close();
-			}
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				R.layout.list_item, list_values);
-		setListAdapter(adapter);
-	}
-
-	public void onClickOpenListView2(View view) {
-		// mach was
-		// Intent intentMap = new Intent(this, MapActivity.class);
-		// startActivity(intentMap);
-		//
-
-		// public void queryDataFromDatabase() {
-		try {
-			dbHelper.createDataBase();
-		} catch (IOException ioe) {
-		}
-		List<String> list_values = new ArrayList<String>();
-		try {
-			database = dbHelper.getDataBase();
-			// DB Abfrage
-			dbCursor = database.rawQuery(
-					"SELECT Name FROM Sehenswuerdigkeiten;", null);
-//			dbCursor = database.rawQuery("SELECT university FROM db_table", null);		
-			dbCursor.moveToFirst();
-			int index = dbCursor.getColumnIndex("Name");
-			while (!dbCursor.isAfterLast()) {
-				String record = dbCursor.getString(index);
-				list_values.add(record);
-				dbCursor.moveToNext();
-			}
-		} finally {
-			if (database != null) {
-				dbHelper.close();
-			}
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				R.layout.list_item, list_values);
-		setListAdapter(adapter);
-	}
+// Öffnen des Listviews1
 	
-	public void onClickOpenListView3(View view) {
-		// mach was
-		// Intent intentMap = new Intent(this, MapActivity.class);
-		// startActivity(intentMap);
-		//
-
-		// public void queryDataFromDatabase() {
+	public void onClickOpenListView1(View view) {
+// Zugriff auf DB
 		try {
 			dbHelper.createDataBase();
 		} catch (IOException ioe) {
@@ -126,8 +74,7 @@ public class DatabaseActivity extends ListActivity {
 			database = dbHelper.getDataBase();
 			// DB Abfrage
 			dbCursor = database.rawQuery(
-					"SELECT Name FROM Gesundheit;", null);
-//			dbCursor = database.rawQuery("SELECT university FROM db_table", null);		
+					"SELECT Name FROM Hunger;", null);		
 			dbCursor.moveToFirst();
 			int index = dbCursor.getColumnIndex("Name");
 			while (!dbCursor.isAfterLast()) {
@@ -143,8 +90,75 @@ public class DatabaseActivity extends ListActivity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				R.layout.list_item, list_values);
 		setListAdapter(adapter);
+		
 	}
 
+	
+//Öffnen ListView2
+	
+	public void onClickOpenListView2(View view) {
+	
+		try {
+			dbHelper.createDataBase();
+		} catch (IOException ioe) {
+		}
+		List<String> list_values = new ArrayList<String>();
+		try {
+			database = dbHelper.getDataBase();
+			// DB Abfrage
+			dbCursor = database.rawQuery(
+					"SELECT Name FROM Sehenswuerdigkeiten;", null);		
+			dbCursor.moveToFirst();
+			int index = dbCursor.getColumnIndex("Name");
+			while (!dbCursor.isAfterLast()) {
+				String record = dbCursor.getString(index);
+				list_values.add(record);
+				dbCursor.moveToNext();
+			}
+		} finally {
+			if (database != null) {
+				dbHelper.close();
+			}
+		}
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.list_item, list_values);
+		setListAdapter(adapter);
+	
+	}
+
+//Öffnen ListView3
+
+	public void onClickOpenListView3(View view) {
+		try {
+			dbHelper.createDataBase();
+		} catch (IOException ioe) {
+		}
+		List<String> list_values = new ArrayList<String>();
+		try {
+			database = dbHelper.getDataBase();
+			// DB Abfrage
+			dbCursor = database.rawQuery(
+					"SELECT Name FROM Gesundheit;", null);		
+			dbCursor.moveToFirst();
+			int index = dbCursor.getColumnIndex("Name");
+			while (!dbCursor.isAfterLast()) {
+				String record = dbCursor.getString(index);
+				list_values.add(record);
+				dbCursor.moveToNext();
+			}
+		} finally {
+			if (database != null) {
+				dbHelper.close();
+			}
+		}
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.list_item, list_values);
+		setListAdapter(adapter);
+	
+	}
+
+	
+	
+	
+// Anklicken eines LiestView-Items
 	public void onListItemClick(ListView l, View v, int pos, long id) {
 
 		Log.d("Fehler", String.valueOf(pos));

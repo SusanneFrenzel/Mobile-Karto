@@ -484,15 +484,14 @@ containing a value of this type.
         public static final int wappen_niederwiesa=0x7f020034;
     }
     public static final class id {
+        public static final int action_list=0x7f070023;
+        public static final int action_map=0x7f070022;
         public static final int action_settings=0x7f070021;
         public static final int adjust_height=0x7f070002;
         public static final int adjust_width=0x7f070001;
         public static final int book_now=0x7f070012;
         public static final int button1=0x7f07001f;
         public static final int button2=0x7f070020;
-        public static final int button3=0x7f07001b;
-        public static final int button4=0x7f07001c;
-        public static final int button5=0x7f07001d;
         public static final int buyButton=0x7f07000c;
         public static final int buy_now=0x7f070011;
         public static final int buy_with_google=0x7f070010;
@@ -502,6 +501,9 @@ containing a value of this type.
         public static final int holo_dark=0x7f070007;
         public static final int holo_light=0x7f070008;
         public static final int hybrid=0x7f070006;
+        public static final int imageButton1=0x7f07001b;
+        public static final int imageButton2=0x7f07001c;
+        public static final int imageButton3=0x7f07001d;
         public static final int image_view_1=0x7f07001e;
         public static final int map=0x7f07001a;
         public static final int match_parent=0x7f07000e;
@@ -545,9 +547,6 @@ containing a value of this type.
         public static final int bild=0x7f060028;
         public static final int button1=0x7f060026;
         public static final int button2=0x7f060027;
-        public static final int button3=0x7f06002b;
-        public static final int button4=0x7f06002c;
-        public static final int button5=0x7f06002d;
         /**   Text for notification shown when the Android Wear apps needs to be updated. Only shown on the wearable. [CHAR LIMIT=NONE] 
          */
         public static final int common_android_wear_notification_needs_update_text=0x7f060009;
@@ -651,11 +650,13 @@ containing a value of this type.
         public static final int create_calendar_title=0x7f060004;
         public static final int decline=0x7f060003;
         public static final int hello_world=0x7f060024;
+        public static final int list=0x7f06002f;
+        public static final int map=0x7f06002e;
         public static final int store_picture_message=0x7f060001;
         public static final int store_picture_title=0x7f060000;
-        public static final int textView1=0x7f06002e;
-        public static final int textView2=0x7f06002f;
-        public static final int textView3=0x7f060030;
+        public static final int textView1=0x7f06002b;
+        public static final int textView2=0x7f06002c;
+        public static final int textView3=0x7f06002d;
         public static final int title_activity_database=0x7f06002a;
         public static final int title_activity_map=0x7f060029;
         /**  Text on a placeholder buy button when Google Play services is not
