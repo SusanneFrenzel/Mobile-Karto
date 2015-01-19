@@ -1,7 +1,0 @@
-INDEX VERSION 1.126+D:\Susi\Mobile Karto\projekt\.metadata\.plugins\org.eclipse.jdt.core
-1882371837.index
-3523435164.index
-1823856830.index
-2971861307.index
-2582764738.index
-848856923.index
