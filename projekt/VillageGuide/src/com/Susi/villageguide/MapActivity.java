@@ -33,6 +33,7 @@ public class MapActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_map:
+			
 		}
 		switch (item.getItemId()) {
 		case R.id.action_list:
@@ -54,6 +55,8 @@ public class MapActivity extends Activity {
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.86572,
 				13.021379), 14));
 
+		
+		 
 		// try{
 		// Intent intentMap1 = getIntent();
 		// String Titel = intentMap1.getStringExtra("Titel");
@@ -231,32 +234,36 @@ public class MapActivity extends Activity {
 				map.addMarker(new MarkerOptions()
 						.icon(BitmapDescriptorFactory
 								.fromResource(R.drawable.star))
-						.position(new LatLng(Lat_d, Long_d)).anchor(0.5f, 0.5f));
+						.position(new LatLng(Lat_d, Long_d))
+						.anchor(0.5f, 0.5f)
+						.title(record)
+						.snippet(
+								"Öffnungszeiten: Mo-Fr: " + snippet1
+										+ ",  Sa: " + snippet2 + ", So: "
+										+ snippet3));
 				// return (record, snippet1, snippet2, snippet3);
 
-				 map.setInfoWindowAdapter(new InfoWindowAdapter() {
-				 @Override
-				public
-				  View getInfoWindow(Marker arg0) {
-				 return null;
-				 }
-				 @Override
-				 public View getInfoContents(Marker marker) {
-				
-				 View v = getLayoutInflater().inflate(R.layout.marker, null);
-				
-				 TextView title= (TextView) v.findViewById(R.id.title);
-				 TextView snippet= (TextView) v.findViewById(R.id.snippet);
-				 title.setText(record);
-				 snippet.setText("Öffnungszeiten:\nMo-Fr " + snippet1 +
-				 "\nSa " + snippet2 + "\nSo " + snippet3);
-				
-				 return v;
-				 }
-				 });
-//				 .title(record)
-//				 .snippet("Öffnungszeiten: Mo-Fr: " + snippet1 + ",  Sa: " +
-//				 snippet2 + ", So: " + snippet3));
+				// map.setInfoWindowAdapter(new InfoWindowAdapter() {
+				// @Override
+				// public
+				// View getInfoWindow(Marker arg0) {
+				// return null;
+				// }
+				// @Override
+				// public View getInfoContents(Marker marker) {
+				//
+				// View v = getLayoutInflater().inflate(R.layout.marker, null);
+				//
+				// TextView title= (TextView) v.findViewById(R.id.title);
+				// TextView snippet= (TextView) v.findViewById(R.id.snippet);
+				// title.setText(record);
+				// snippet.setText("Öffnungszeiten:\nMo-Fr " + snippet1 +
+				// "\nSa " + snippet2 + "\nSo " + snippet3);
+				//
+				// return v;
+				// }
+				// });
+
 				dbCursor.moveToNext();
 			}
 		} finally {
