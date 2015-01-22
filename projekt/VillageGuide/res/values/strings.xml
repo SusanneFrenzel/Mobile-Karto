@@ -13,5 +13,6 @@
     <string name="textView3">Gesundheit</string>
 	<string name="map">Karte</string>
 	<string name="list">Liste</string>
+	<string name="listactive">Nichts gewählt</string>
 	
 </resources>
