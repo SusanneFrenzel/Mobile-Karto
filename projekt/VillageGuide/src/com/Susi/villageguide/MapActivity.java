@@ -23,7 +23,12 @@ public class MapActivity extends Activity {
 	SQLiteDatabase database = null;
 	Cursor dbCursor;
 	DatabaseHelper dbHelper = new DatabaseHelper(this);
-
+	String record;
+	String snippet1;
+	String snippet2;
+	String snippet3;
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.map, menu);
@@ -55,30 +60,26 @@ public class MapActivity extends Activity {
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.86572,
 				13.021379), 14));
 
+		Intent intentMap1 = getIntent();
+		String Titel = intentMap1.getStringExtra("Titel");
+		String OZ1 = intentMap1.getStringExtra("OH1");
+		String OZ2 = intentMap1.getStringExtra("OH2");
+		String OZ3 = intentMap1.getStringExtra("OH3");
+		Bundle b = getIntent().getExtras();
+		if (Titel!=null) {
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(b.getDouble("Lat"),b.getDouble("Long")), 16));
+			map.addMarker(new MarkerOptions()
+			 .icon(BitmapDescriptorFactory.fromResource(R.drawable.star))
+			 .position(new LatLng(b.getDouble("Lat"), b.getDouble("Long")))
+			 .anchor(0.5f, 0.5f)
+			 .title(Titel)
+			 .snippet(
+			 "Öffnungszeiten: Mo-Fr: " + OZ1 + ",  Sa: " + OZ2
+			 + ", So: " + OZ3));
+		}
 		
-		 
-		// try{
-		// Intent intentMap1 = getIntent();
-		// String Titel = intentMap1.getStringExtra("Titel");
-		// String OZ1 = intentMap1.getStringExtra("OH1");
-		// String OZ2 = intentMap1.getStringExtra("OH2");
-		// String OZ3 = intentMap1.getStringExtra("OH3");
-		// String Long = intentMap1.getStringExtra("Longitude");
-		// String Lat = intentMap1.getStringExtra("Latitude");
-		// Double Long_d = Double.parseDouble(Long);
-		// Double Lat_d = Double.parseDouble(Lat);
-		// map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Lat_d,
-		// Long_d), 18));
-		// map.addMarker(new MarkerOptions()
-		// .icon(BitmapDescriptorFactory.fromResource(R.drawable.star))
-		// .position(new LatLng(Lat_d, Long_d))
-		// .anchor(0.5f, 0.5f)
-		// .title(Titel)
-		// .snippet(
-		// "Öffnungszeiten: Mo-Fr: " + OZ1 + ",  Sa: " + OZ2
-		// + ", So: " + OZ3));
-		// }
-		// finally {}
+	
+	
 	}
 
 	public void onClickShowOnMap(View view) {
@@ -117,6 +118,8 @@ public class MapActivity extends Activity {
 				String lat = dbCursor.getString(index6);
 				Double Long_d = Double.parseDouble(lgn);
 				Double Lat_d = Double.parseDouble(lat);
+				map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.86572,
+						13.021379), 14));
 				map.addMarker(new MarkerOptions()
 						.icon(BitmapDescriptorFactory
 								.fromResource(R.drawable.star))
@@ -173,6 +176,8 @@ public class MapActivity extends Activity {
 				String lat = dbCursor.getString(index6);
 				Double Long_d = Double.parseDouble(lgn);
 				Double Lat_d = Double.parseDouble(lat);
+				map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.86572,
+						13.021379), 14));
 				map.addMarker(new MarkerOptions()
 						.icon(BitmapDescriptorFactory
 								.fromResource(R.drawable.star))
@@ -223,46 +228,48 @@ public class MapActivity extends Activity {
 			int index6 = dbCursor.getColumnIndex("Lat");
 			while (!dbCursor.isAfterLast()) {
 
-				String record = dbCursor.getString(index);
-				String snippet1 = dbCursor.getString(index2);
-				String snippet2 = dbCursor.getString(index3);
-				String snippet3 = dbCursor.getString(index4);
+				record = dbCursor.getString(index);
+				snippet1 = dbCursor.getString(index2);
+				snippet2 = dbCursor.getString(index3);
+				snippet3 = dbCursor.getString(index4);
 				String lgn = dbCursor.getString(index5);
 				String lat = dbCursor.getString(index6);
 				Double Long_d = Double.parseDouble(lgn);
 				Double Lat_d = Double.parseDouble(lat);
+				map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.86572,
+						13.021379), 14));
 				map.addMarker(new MarkerOptions()
 						.icon(BitmapDescriptorFactory
 								.fromResource(R.drawable.star))
 						.position(new LatLng(Lat_d, Long_d))
-						.anchor(0.5f, 0.5f)
-						.title(record)
-						.snippet(
-								"Öffnungszeiten: Mo-Fr: " + snippet1
-										+ ",  Sa: " + snippet2 + ", So: "
-										+ snippet3));
+						.anchor(0.5f, 0.5f));
+//						.title(record)
+//						.snippet(
+//								"Öffnungszeiten: Mo-Fr: " + snippet1
+//										+ ",  Sa: " + snippet2 + ", So: "
+//										+ snippet3));
 				// return (record, snippet1, snippet2, snippet3);
 
-				// map.setInfoWindowAdapter(new InfoWindowAdapter() {
-				// @Override
-				// public
-				// View getInfoWindow(Marker arg0) {
-				// return null;
-				// }
-				// @Override
-				// public View getInfoContents(Marker marker) {
-				//
-				// View v = getLayoutInflater().inflate(R.layout.marker, null);
-				//
-				// TextView title= (TextView) v.findViewById(R.id.title);
-				// TextView snippet= (TextView) v.findViewById(R.id.snippet);
-				// title.setText(record);
-				// snippet.setText("Öffnungszeiten:\nMo-Fr " + snippet1 +
-				// "\nSa " + snippet2 + "\nSo " + snippet3);
-				//
-				// return v;
-				// }
-				// });
+				 map.setInfoWindowAdapter(new InfoWindowAdapter() {
+				 @Override
+				 public
+				 View getInfoWindow(Marker arg0) {
+				 return null;
+				 }
+				 @Override
+				 public View getInfoContents(Marker marker) {
+				
+				 View v = getLayoutInflater().inflate(R.layout.marker, null);
+				
+				 TextView title= (TextView) v.findViewById(R.id.title);
+				 TextView snippet= (TextView) v.findViewById(R.id.snippet);
+				 title.setText(record);
+				 snippet.setText("Öffnungszeiten:\nMo-Fr " + snippet1 +
+				 "\nSa " + snippet2 + "\nSo " + snippet3);
+				
+				 return v;
+				 }
+				 });
 
 				dbCursor.moveToNext();
 			}
