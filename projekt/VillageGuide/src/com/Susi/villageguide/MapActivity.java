@@ -27,8 +27,7 @@ public class MapActivity extends Activity {
 	String snippet1;
 	String snippet2;
 	String snippet3;
-	
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.map, menu);
@@ -38,7 +37,7 @@ public class MapActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_map:
-			
+
 		}
 		switch (item.getItemId()) {
 		case R.id.action_list:
@@ -61,25 +60,53 @@ public class MapActivity extends Activity {
 				13.021379), 14));
 
 		Intent intentMap1 = getIntent();
-		String Titel = intentMap1.getStringExtra("Titel");
-		String OZ1 = intentMap1.getStringExtra("OH1");
-		String OZ2 = intentMap1.getStringExtra("OH2");
-		String OZ3 = intentMap1.getStringExtra("OH3");
+		final String Titel = intentMap1.getStringExtra("Titel");
+		final String OZ1 = intentMap1.getStringExtra("OH1");
+		final String OZ2 = intentMap1.getStringExtra("OH2");
+		final String OZ3 = intentMap1.getStringExtra("OH3");
 		Bundle b = getIntent().getExtras();
-		if (Titel!=null) {
-			map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(b.getDouble("Lat"),b.getDouble("Long")), 16));
+		if (Titel != null) {
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+					new LatLng(b.getDouble("Lat"), b.getDouble("Long")), 16));
 			map.addMarker(new MarkerOptions()
-			 .icon(BitmapDescriptorFactory.fromResource(R.drawable.star))
-			 .position(new LatLng(b.getDouble("Lat"), b.getDouble("Long")))
-			 .anchor(0.5f, 0.5f)
-			 .title(Titel)
-			 .snippet(
-			 "Öffnungszeiten: Mo-Fr: " + OZ1 + ",  Sa: " + OZ2
-			 + ", So: " + OZ3));
+					.icon(BitmapDescriptorFactory.fromResource(R.drawable.star))
+					.position(
+							new LatLng(b.getDouble("Lat"), b.getDouble("Long")))
+					.anchor(0.5f, 0.5f));
+//					.title(Titel)
+//					.snippet(
+//							"Öffnungszeiten: Mo-Fr: " + OZ1 + ",  Sa: " + OZ2
+//									+ ", So: " + OZ3));
+            map.setInfoWindowAdapter(new InfoWindowAdapter() {
+                
+                @Override
+                public View getInfoWindow(Marker arg0) {
+                return null;
+                }
+
+                @Override
+                public View getInfoContents(Marker marker) {
+                       
+                  
+                      
+                      record = Titel;
+                      snippet1 = OZ1;
+                      snippet2 = OZ2;
+                      snippet3 = OZ3;
+               
+                      View v = getLayoutInflater().inflate(R.layout.marker, null);
+               
+                      TextView title= (TextView) v.findViewById(R.id.title);
+                      TextView snippet= (TextView) v.findViewById(R.id.snippet);
+                      title.setText(record);
+                      snippet.setText("Öffnungszeiten:\nMo-Fr " + snippet1 +"\nSa " + snippet2 + "\nSo " + snippet3);
+               
+                return v;
+                }
+                });
+
 		}
-		
-	
-	
+
 	}
 
 	public void onClickShowOnMap(View view) {
@@ -88,10 +115,6 @@ public class MapActivity extends Activity {
 				R.id.map)).getMap();
 		map.clear();
 		try {
-			dbHelper.createDataBase();
-		} catch (IOException ioe) {
-		}
-		try {
 			database = dbHelper.getDataBase();
 
 			// DB Abfrage
@@ -99,45 +122,73 @@ public class MapActivity extends Activity {
 					.rawQuery(
 							"SELECT  Name, Oeffnungszeiten_Montag_bis_Freitag, Oeffnungszeiten_Samstag, Oeffnungszeiten_Sonntag, Long, Lat FROM Gesundheit;",
 							null);
-			// dbCursor = database.rawQuery("SELECT university FROM db_table",
-			// null);
 			dbCursor.moveToFirst();
-			int index = dbCursor.getColumnIndex("Name");
-			int index2 = dbCursor
+			final int index = dbCursor.getColumnIndex("Name");
+			final int index2 = dbCursor
 					.getColumnIndex("Oeffnungszeiten_Montag_bis_Freitag");
-			int index3 = dbCursor.getColumnIndex("Oeffnungszeiten_Samstag");
-			int index4 = dbCursor.getColumnIndex("Oeffnungszeiten_Sonntag");
+			final int index3 = dbCursor
+					.getColumnIndex("Oeffnungszeiten_Samstag");
+			final int index4 = dbCursor
+					.getColumnIndex("Oeffnungszeiten_Sonntag");
 			int index5 = dbCursor.getColumnIndex("Long");
 			int index6 = dbCursor.getColumnIndex("Lat");
+
+			int counter = 0;
+
 			while (!dbCursor.isAfterLast()) {
-				String record = dbCursor.getString(index);
-				String snippet1 = dbCursor.getString(index2);
-				String snippet2 = dbCursor.getString(index3);
-				String snippet3 = dbCursor.getString(index4);
+
 				String lgn = dbCursor.getString(index5);
 				String lat = dbCursor.getString(index6);
+
 				Double Long_d = Double.parseDouble(lgn);
 				Double Lat_d = Double.parseDouble(lat);
-				map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.86572,
-						13.021379), 14));
+
 				map.addMarker(new MarkerOptions()
 						.icon(BitmapDescriptorFactory
 								.fromResource(R.drawable.star))
-						.position(new LatLng(Lat_d, Long_d))
-						.anchor(0.5f, 0.5f)
-						.title(record)
-						.snippet(
-								"Öffnungszeiten: Mo-Fr: " + snippet1
-										+ ",  Sa: " + snippet2 + ", So: "
-										+ snippet3));
+						.position(new LatLng(Lat_d, Long_d)).anchor(0.5f, 0.5f)
+						.title("" + counter));
+
 				dbCursor.moveToNext();
+				counter++;
 			}
+
+			map.setInfoWindowAdapter(new InfoWindowAdapter() {
+
+				@Override
+				public View getInfoWindow(Marker arg0) {
+					return null;
+				}
+
+				@Override
+				public View getInfoContents(Marker marker) {
+
+					int id = Integer.parseInt(marker.getTitle());
+
+					dbCursor.moveToPosition(id);
+
+					record = dbCursor.getString(index);
+					snippet1 = dbCursor.getString(index2);
+					snippet2 = dbCursor.getString(index3);
+					snippet3 = dbCursor.getString(index4);
+
+					View v = getLayoutInflater().inflate(R.layout.marker, null);
+
+					TextView title = (TextView) v.findViewById(R.id.title);
+					TextView snippet = (TextView) v.findViewById(R.id.snippet);
+					title.setText(record);
+					snippet.setText("Öffnungszeiten:\nMo-Fr " + snippet1
+							+ "\nSa " + snippet2 + "\nSo " + snippet3);
+
+					return v;
+				}
+			});
+
 		} finally {
 			if (database != null) {
 				dbHelper.close();
 			}
 		}
-
 	}
 
 	public void onClickShowOnMap1(View view) {
@@ -146,10 +197,6 @@ public class MapActivity extends Activity {
 				R.id.map)).getMap();
 		map.clear();
 		try {
-			dbHelper.createDataBase();
-		} catch (IOException ioe) {
-		}
-		try {
 			database = dbHelper.getDataBase();
 
 			// DB Abfrage
@@ -157,39 +204,68 @@ public class MapActivity extends Activity {
 					.rawQuery(
 							"SELECT  Name, Oeffnungszeiten_Montag_bis_Freitag, Oeffnungszeiten_Samstag, Oeffnungszeiten_Sonntag, Long, Lat FROM Hunger;",
 							null);
-			// dbCursor = database.rawQuery("SELECT university FROM db_table",
-			// null);
 			dbCursor.moveToFirst();
-			int index = dbCursor.getColumnIndex("Name");
-			int index2 = dbCursor
+			final int index = dbCursor.getColumnIndex("Name");
+			final int index2 = dbCursor
 					.getColumnIndex("Oeffnungszeiten_Montag_bis_Freitag");
-			int index3 = dbCursor.getColumnIndex("Oeffnungszeiten_Samstag");
-			int index4 = dbCursor.getColumnIndex("Oeffnungszeiten_Sonntag");
+			final int index3 = dbCursor
+					.getColumnIndex("Oeffnungszeiten_Samstag");
+			final int index4 = dbCursor
+					.getColumnIndex("Oeffnungszeiten_Sonntag");
 			int index5 = dbCursor.getColumnIndex("Long");
 			int index6 = dbCursor.getColumnIndex("Lat");
+
+			int counter = 0;
+
 			while (!dbCursor.isAfterLast()) {
-				String record = dbCursor.getString(index);
-				String snippet1 = dbCursor.getString(index2);
-				String snippet2 = dbCursor.getString(index3);
-				String snippet3 = dbCursor.getString(index4);
+
 				String lgn = dbCursor.getString(index5);
 				String lat = dbCursor.getString(index6);
+
 				Double Long_d = Double.parseDouble(lgn);
 				Double Lat_d = Double.parseDouble(lat);
-				map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.86572,
-						13.021379), 14));
+
 				map.addMarker(new MarkerOptions()
 						.icon(BitmapDescriptorFactory
 								.fromResource(R.drawable.star))
-						.position(new LatLng(Lat_d, Long_d))
-						.anchor(0.5f, 0.5f)
-						.title(record)
-						.snippet(
-								"Öffnungszeiten: Mo-Fr: " + snippet1
-										+ ",  Sa: " + snippet2 + ", So: "
-										+ snippet3));
+						.position(new LatLng(Lat_d, Long_d)).anchor(0.5f, 0.5f)
+						.title("" + counter));
+
 				dbCursor.moveToNext();
+				counter++;
 			}
+
+			map.setInfoWindowAdapter(new InfoWindowAdapter() {
+
+				@Override
+				public View getInfoWindow(Marker arg0) {
+					return null;
+				}
+
+				@Override
+				public View getInfoContents(Marker marker) {
+
+					int id = Integer.parseInt(marker.getTitle());
+
+					dbCursor.moveToPosition(id);
+
+					record = dbCursor.getString(index);
+					snippet1 = dbCursor.getString(index2);
+					snippet2 = dbCursor.getString(index3);
+					snippet3 = dbCursor.getString(index4);
+
+					View v = getLayoutInflater().inflate(R.layout.marker, null);
+
+					TextView title = (TextView) v.findViewById(R.id.title);
+					TextView snippet = (TextView) v.findViewById(R.id.snippet);
+					title.setText(record);
+					snippet.setText("Öffnungszeiten:\nMo-Fr " + snippet1
+							+ "\nSa " + snippet2 + "\nSo " + snippet3);
+
+					return v;
+				}
+			});
+
 		} finally {
 			if (database != null) {
 				dbHelper.close();
@@ -205,10 +281,6 @@ public class MapActivity extends Activity {
 		map.clear();
 
 		try {
-			dbHelper.createDataBase();
-		} catch (IOException ioe) {
-		}
-		try {
 			database = dbHelper.getDataBase();
 
 			// DB Abfrage
@@ -216,68 +288,72 @@ public class MapActivity extends Activity {
 					.rawQuery(
 							"SELECT  Name, Oeffnungszeiten_Montag_bis_Freitag, Oeffnungszeiten_Samstag, Oeffnungszeiten_Sonntag, Long, Lat FROM Sehenswuerdigkeiten;",
 							null);
-			// dbCursor = database.rawQuery("SELECT university FROM db_table",
-			// null);
 			dbCursor.moveToFirst();
-			int index = dbCursor.getColumnIndex("Name");
-			int index2 = dbCursor
+			final int index = dbCursor.getColumnIndex("Name");
+			final int index2 = dbCursor
 					.getColumnIndex("Oeffnungszeiten_Montag_bis_Freitag");
-			int index3 = dbCursor.getColumnIndex("Oeffnungszeiten_Samstag");
-			int index4 = dbCursor.getColumnIndex("Oeffnungszeiten_Sonntag");
+			final int index3 = dbCursor
+					.getColumnIndex("Oeffnungszeiten_Samstag");
+			final int index4 = dbCursor
+					.getColumnIndex("Oeffnungszeiten_Sonntag");
 			int index5 = dbCursor.getColumnIndex("Long");
 			int index6 = dbCursor.getColumnIndex("Lat");
+
+			int counter = 0;
+
 			while (!dbCursor.isAfterLast()) {
 
-				record = dbCursor.getString(index);
-				snippet1 = dbCursor.getString(index2);
-				snippet2 = dbCursor.getString(index3);
-				snippet3 = dbCursor.getString(index4);
 				String lgn = dbCursor.getString(index5);
 				String lat = dbCursor.getString(index6);
+
 				Double Long_d = Double.parseDouble(lgn);
 				Double Lat_d = Double.parseDouble(lat);
-				map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.86572,
-						13.021379), 14));
+
 				map.addMarker(new MarkerOptions()
 						.icon(BitmapDescriptorFactory
 								.fromResource(R.drawable.star))
-						.position(new LatLng(Lat_d, Long_d))
-						.anchor(0.5f, 0.5f));
-//						.title(record)
-//						.snippet(
-//								"Öffnungszeiten: Mo-Fr: " + snippet1
-//										+ ",  Sa: " + snippet2 + ", So: "
-//										+ snippet3));
-				// return (record, snippet1, snippet2, snippet3);
-
-				 map.setInfoWindowAdapter(new InfoWindowAdapter() {
-				 @Override
-				 public
-				 View getInfoWindow(Marker arg0) {
-				 return null;
-				 }
-				 @Override
-				 public View getInfoContents(Marker marker) {
-				
-				 View v = getLayoutInflater().inflate(R.layout.marker, null);
-				
-				 TextView title= (TextView) v.findViewById(R.id.title);
-				 TextView snippet= (TextView) v.findViewById(R.id.snippet);
-				 title.setText(record);
-				 snippet.setText("Öffnungszeiten:\nMo-Fr " + snippet1 +
-				 "\nSa " + snippet2 + "\nSo " + snippet3);
-				
-				 return v;
-				 }
-				 });
+						.position(new LatLng(Lat_d, Long_d)).anchor(0.5f, 0.5f)
+						.title("" + counter));
 
 				dbCursor.moveToNext();
+				counter++;
 			}
+
+			map.setInfoWindowAdapter(new InfoWindowAdapter() {
+
+				@Override
+				public View getInfoWindow(Marker arg0) {
+					return null;
+				}
+
+				@Override
+				public View getInfoContents(Marker marker) {
+
+					int id = Integer.parseInt(marker.getTitle());
+
+					dbCursor.moveToPosition(id);
+
+					record = dbCursor.getString(index);
+					snippet1 = dbCursor.getString(index2);
+					snippet2 = dbCursor.getString(index3);
+					snippet3 = dbCursor.getString(index4);
+
+					View v = getLayoutInflater().inflate(R.layout.marker, null);
+
+					TextView title = (TextView) v.findViewById(R.id.title);
+					TextView snippet = (TextView) v.findViewById(R.id.snippet);
+					title.setText(record);
+					snippet.setText("Öffnungszeiten:\nMo-Fr " + snippet1
+							+ "\nSa " + snippet2 + "\nSo " + snippet3);
+
+					return v;
+				}
+			});
+
 		} finally {
 			if (database != null) {
 				dbHelper.close();
 			}
 		}
-
 	}
 }
