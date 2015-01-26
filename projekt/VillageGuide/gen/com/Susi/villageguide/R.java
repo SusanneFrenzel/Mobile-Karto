@@ -420,9 +420,9 @@ containing a value of this type.
         public static final int star=0x7f02002b;
     }
     public static final class id {
-        public static final int action_list=0x7f070021;
-        public static final int action_map=0x7f070020;
-        public static final int action_settings=0x7f07001f;
+        public static final int action_list=0x7f070020;
+        public static final int action_map=0x7f07001f;
+        public static final int action_settings=0x7f07001e;
         public static final int book_now=0x7f070010;
         public static final int button1=0x7f07001a;
         public static final int button2=0x7f07001b;
@@ -447,12 +447,11 @@ containing a value of this type.
         public static final int sandbox=0x7f070008;
         public static final int satellite=0x7f070002;
         public static final int selectionDetails=0x7f07000b;
-        public static final int snippet=0x7f07001e;
+        public static final int snippet=0x7f07001d;
         public static final int strict_sandbox=0x7f070009;
         public static final int terrain=0x7f070003;
-        public static final int textView1=0x7f07001c;
         public static final int text_view_1=0x7f070014;
-        public static final int title=0x7f07001d;
+        public static final int title=0x7f07001c;
         public static final int wrap_content=0x7f07000d;
     }
     public static final class integer {
@@ -462,10 +461,8 @@ containing a value of this type.
         public static final int activity_database=0x7f030000;
         public static final int activity_map=0x7f030001;
         public static final int activity_start=0x7f030002;
-        public static final int group=0x7f030003;
-        public static final int list_item=0x7f030004;
-        public static final int marker=0x7f030005;
-        public static final int row=0x7f030006;
+        public static final int list_item=0x7f030003;
+        public static final int marker=0x7f030004;
     }
     public static final class menu {
         public static final int database=0x7f0a0000;

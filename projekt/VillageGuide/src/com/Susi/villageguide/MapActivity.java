@@ -115,8 +115,11 @@ public class MapActivity extends Activity {
 				R.id.map)).getMap();
 		map.clear();
 		try {
+			dbHelper.createDataBase();
+		} catch (IOException ioe) {
+		}
+		try {
 			database = dbHelper.getDataBase();
-
 			// DB Abfrage
 			dbCursor = database
 					.rawQuery(
@@ -196,6 +199,9 @@ public class MapActivity extends Activity {
 		GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(
 				R.id.map)).getMap();
 		map.clear();
+		try {
+			dbHelper.createDataBase();
+		} catch (IOException ioe) {}
 		try {
 			database = dbHelper.getDataBase();
 
@@ -279,6 +285,9 @@ public class MapActivity extends Activity {
 		GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(
 				R.id.map)).getMap();
 		map.clear();
+		try {
+			dbHelper.createDataBase();
+		} catch (IOException ioe) {}
 
 		try {
 			database = dbHelper.getDataBase();
